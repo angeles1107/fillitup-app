@@ -1,0 +1,13 @@
+# Archivos de entorno
+.env
+# Directorios de dependencias
+node_modules/
+
+# Archivos de depuración y logs
+npm-debug.log*
+*.log
+
+# Directorios de salida de compilación
+/dist
+/build
+/tmp
