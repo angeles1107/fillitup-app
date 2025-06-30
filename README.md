@@ -97,6 +97,32 @@ No se integró una API de IA directamente en esta versión, pero se planea para 
 }
 ```
 
+##  Endpoints Utilizados
+
+### `/api/goals`
+
+| Método | Ruta             | Descripción |
+|--------|------------------|-------------|
+| `POST` | `/api/goals`     | Crear una nueva meta de ahorro |
+| `GET`  | `/api/goals`     | Obtener todas las metas |
+| `GET`  | `/api/goals/:id` | Obtener una meta específica |
+| `PUT`  | `/api/goals/:id` | Actualizar una meta |
+| `DELETE` | `/api/goals/:id` | Eliminar una meta y sus aportes |
+
+### `/api/contributions`
+
+| Método | Ruta                               | Descripción |
+|--------|------------------------------------|-------------|
+| `POST` | `/api/contributions`              | Registrar un nuevo aporte |
+| `GET`  | `/api/contributions/goal/:goalId` | Ver aportes por meta |
+| `GET`  | `/api/contributions/progress/:goalId` | Obtener porcentaje de avance |
+| `DELETE` | `/api/contributions/:id`         | Eliminar un aporte |
+
+### `/`
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| `GET` | `/` | Ruta base para verificar que el backend responde |
+
 ---
 
 ## Estructura del Proyecto
