@@ -203,6 +203,7 @@ Accede en tu navegador a:
 
 ## Manejo de Errores y Validaciones
 
+  Se logro implementar: 
 - Validaciones básicas en los formularios del frontend
 - Manejo de errores del servidor con respuestas claras
 - Feedback visual con toasts para éxito o error en acciones
