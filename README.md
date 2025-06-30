@@ -211,6 +211,14 @@ Accede en tu navegador a:
 
 ---
 
+## Limitaciones
+
+- Actualmente no se implementa autenticación de usuarios, por lo tanto, todas las metas están disponibles sin control de acceso.
+- La subida de imágenes depende de Cloudinary pero no incluye validación de tamaño o tipo de archivo.
+- No hay control de sesión o historial por usuario (todas las metas están en la misma base de datos).
+- La visualización progresiva de la imagen se basa en un efecto visual simplificado.
+- El backend no incluye paginación ni filtros avanzados para los datos.
+
 ## Mejoras Futuras
 
 - Crear un login y autenticación de usuarios
