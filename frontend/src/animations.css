@@ -1,0 +1,232 @@
+ @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        @keyframes fillUp {
+          from {
+            clip-path: inset(100% 0 0 0);
+          }
+          to {
+            clip-path: inset(30% 0 0 0);
+          }
+        }
+
+        @keyframes progressBar {
+          from {
+            width: 0%;
+          }
+          to {
+            width: 70%;
+          }
+        }
+
+        @keyframes glow {
+          0%, 100% {
+            box-shadow: 0 0 5px rgba(110, 231, 183, 0.5);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(110, 231, 183, 0.8);
+          }
+        }
+
+        @keyframes bounceSoft {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
+        }
+
+        @keyframes pulseSoft {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.8;
+          }
+        }
+
+        @keyframes gradientText {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+
+        @keyframes iconBounce {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+        }
+
+        @keyframes stepBounce {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+        }
+
+        @keyframes drawLine {
+          from {
+            width: 0%;
+          }
+          to {
+            width: 100%;
+          }
+        }
+
+        @keyframes progressGrow {
+          0% {
+            width: 0%; /* Esta línea es clave para la animación de ancho */
+            transform: scaleY(0.8);
+          }
+          50% {
+            transform: scaleY(1.1);
+          }
+          100% {
+            /* Aquí el width se definirá mediante un estilo en línea */
+            transform: scaleY(1);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+
+        @keyframes sparkle {
+          0%,
+          100% {
+            opacity: 0;
+            transform: scale(0);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes slide-right {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+
+
+        .animate-fade-in-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-float {
+          animation: float 30s ease-in-out infinite;
+        }
+
+        .animate-fill-up {
+          animation: fillUp 2s ease-out 1s forwards;
+        }
+
+        .animate-progress-bar {
+          animation: progressBar 2s ease-out 1.5s forwards;
+          width: 0%;
+        }
+
+        .animate-glow {
+          animation: glow 2s ease-in-out infinite;
+        }
+
+        .animate-bounce-soft {
+          animation: bounceSoft 2s ease-in-out infinite;
+        }
+
+        .animate-pulse-soft {
+          animation: pulseSoft 2s ease-in-out infinite;
+        }
+
+        .animate-gradient-text {
+          background: linear-gradient(-45deg, #10b981, #6ee7b7, #34d399, #059669);
+          background-size: 400% 400%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: gradientText 3s ease infinite;
+        }
+
+        .animate-icon-bounce {
+          animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        .animate-step-bounce {
+          animation: stepBounce 1s ease-in-out;
+        }
+
+        .animate-draw-line {
+          animation: drawLine 1s ease-out forwards;
+          width: 0%;
+        }
+
+        .animate-counter {
+          animation: fadeInUp 0.8s ease-out 2s forwards;
+          opacity: 0;
+        }
+
+        .animate-shimmer {
+          animation: shimmer 2s infinite linear;
+        }
+
+        .animate-sparkle {
+          animation: sparkle 2s infinite ease-out;
+        }
+
+        .animate-slide-right {
+          animation: slide-right 2s infinite;
+        }
+        .animation-delay-200 {
+          animation-delay: 200ms;
+        }
+
+        .animation-delay-400 {
+          animation-delay: 400ms;
+        }
+
+        .animation-delay-600 {
+          animation-delay: 600ms;
+        }
+
+        .shadow-3xl {
+          box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .animation-delay-0 { animation-delay: 0s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-1000 { animation-delay: 1s; }
