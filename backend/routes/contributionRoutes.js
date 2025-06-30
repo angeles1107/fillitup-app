@@ -43,6 +43,8 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+//Obtener el progreso de una meta
+
 router.get('/progress/:goalId', async (req, res) => {
   try {
     const goalId = req.params.goalId;

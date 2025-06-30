@@ -19,12 +19,12 @@ import {
   Mail,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-// ¡Importa las funciones de easing directamente desde framer-motion!
 import { motion, easeOut } from "framer-motion";
 
 export default function FillItUpLanding() {
   const navigate = useNavigate();
 
+  //Redirecciona al usuario a la ruta "/dashboard" de la aplicación.
   const handleStartClick = () => {
     navigate("/dashboard");
   };
@@ -37,12 +37,13 @@ export default function FillItUpLanding() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: easeOut, // ¡CAMBIO CLAVE AQUÍ! Usa la función easeOut importada
+        ease: easeOut, 
         staggerChildren: 0.15,
       },
     },
   };
 
+  // Animaciones para elementos individuales dentro de un contenedor
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -56,7 +57,7 @@ export default function FillItUpLanding() {
       transition: {
         delay,
         duration: 0.6,
-        ease: easeOut, // ¡CAMBIO CLAVE AQUÍ! También en esta variante
+        ease: easeOut, 
       },
     },
   });
@@ -106,7 +107,7 @@ export default function FillItUpLanding() {
             financieras cobran vida con cada aporte.
           </motion.p>
 
-          {/* Visual Progress Demo */}
+          {/* Demostración Visual del Progreso */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,11 +119,10 @@ export default function FillItUpLanding() {
                 Mi iPhone 15 Pro
               </h3>
               <div className="relative w-32 h-48 mx-auto mb-6 group">
-                {/* Phone outline */}
                 <div className="absolute inset-0 border-4 border-slate-300 rounded-2xl bg-slate-100 transition-all duration-300 group-hover:border-slate-400">
                   <Smartphone className="w-full h-full text-slate-300 p-4 transition-colors duration-300" />
                 </div>
-                {/* Fill effect - 70% filled with animation */}
+                {/* Efecto de relleno - 70% lleno con animación */}
                 <div
                   className="absolute inset-0 border-4 border-emerald-400 rounded-2xl bg-gradient-to-t from-emerald-400 to-emerald-300 overflow-hidden animate-fill-up transition-all duration-300 group-hover:border-emerald-500"
                   style={{ clipPath: "inset(30% 0 0 0)" }}
@@ -132,13 +132,14 @@ export default function FillItUpLanding() {
                     style={{ filter: "brightness(0.9)" }}
                   />
                 </div>
-                {/* Progress indicator */}
+                {/* Indicador de porcentaje flotante */}
                 <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 animate-bounce-soft">
                   <div className="bg-emerald-400 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg animate-glow">
                     70%
                   </div>
                 </div>
               </div>
+              {/* Barra de progreso y monto */}
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-600">Progreso</span>
@@ -156,6 +157,7 @@ export default function FillItUpLanding() {
             </div>
           </motion.div>
 
+          {/* Botón principal de llamada a la acción */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -199,7 +201,8 @@ export default function FillItUpLanding() {
           </div>
 
           <motion.div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {[
+            {[ 
+               // Array de objetos, cada uno representando un problema con título, descripción e icono.
               {
                 title: "Números Fríos",
                 description: "Ver solo cifras en tu cuenta no inspira ni motiva a seguir ahorrando",
@@ -221,6 +224,7 @@ export default function FillItUpLanding() {
                 icon: <PartyPopper className="w-8 h-8 text-slate-600" />,
               },
             ].map((item, index) => (
+              // Mapea el array para renderizar cada problema como un `motion.div` animado.
               <motion.div
                 key={index}
                 variants={delayItemVariants(index * 0.15)}
@@ -269,6 +273,7 @@ export default function FillItUpLanding() {
 
           <motion.div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
+              // Array de objetos, cada uno representando una característica clave de la solución.
               {
                 icon: <Eye className="w-8 h-8" />,
                 title: "Visualiza tu Éxito",
@@ -285,6 +290,7 @@ export default function FillItUpLanding() {
                 description: "Cada depósito se refleja instantáneamente en tu imagen, creando una experiencia visual única.",
               },
             ].map((feature, index) => (
+              // Mapea el array para renderizar cada característica como un `motion.div` con animaciones.
               <motion.div
                 key={index}
                 variants={delayItemVariants(index * 0.2)}
@@ -310,7 +316,7 @@ export default function FillItUpLanding() {
       </motion.section>
 
 
-      {/* How It Works Section */}
+      {/* Seccion Cómo funciona la aplicación */}
       <motion.section
         className="py-20 bg-slate-50"
         variants={containerVariants}
@@ -390,7 +396,7 @@ export default function FillItUpLanding() {
         </div>
       </motion.section>
 
-      {/* Popular Goals Section */}
+      {/* Seccion ejemplos de meta */}
       <motion.section
         className="py-20 bg-white"
         variants={containerVariants}
@@ -486,6 +492,7 @@ export default function FillItUpLanding() {
             Únete a miles de personas que ya están convirtiendo sus sueños en
             realidad con FillItUp
           </motion.p>
+          {/* Botón final de llamada a la acción */}
           <motion.div variants={delayItemVariants(0.4)}>
             <Button
               size="lg"
@@ -531,4 +538,4 @@ export default function FillItUpLanding() {
       </footer> 
     </div>
   );
-}
+} 

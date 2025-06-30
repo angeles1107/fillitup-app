@@ -1,5 +1,3 @@
-// src/pages/CreateGoalPage.tsx
-
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,16 +5,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload, X, ArrowLeft } from "lucide-react";
-// Importa la función 'toast' de 'sonner'
 import { toast } from "sonner";
 
-// Obtén las variables de entorno para Cloudinary y la API
+// Variables de entorno para Cloudinary y la API
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
 export default function CreateGoal() {
   const navigate = useNavigate();
+  //Estados del componente
   const [title, setTitle] = useState("");
   const [targetAmount, setTargetAmount] = useState<number | "">("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -24,20 +22,21 @@ export default function CreateGoal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
-  // Lógica para la carga de imagen a Cloudinary
+  // Función para manejar la subida de una imagen seleccionada por el usuario, realiza la previsualización local y luego envía la imagen a Cloudinary
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      // 1. Mostrar previsualización local inmediatamente
+      // 1. Para mostrar previsualización local inmediatamente
       const reader = new FileReader();
       reader.onloadend = () => {
+        // Cuando el archivo se ha leído, establece la URL de datos como previsualización.
         setLocalImagePreview(reader.result as string);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // Lee el archivo como una URL de datos
 
-      // 2. Subir la imagen a Cloudinary
+      // 2. Inicia el proceso de subida de la imagen a Cloudinary
       setIsUploadingImage(true); // Indicar que la imagen se está subiendo
-      toast.info("Subiendo imagen...", { id: "upload-image" }); // Notificación de carga
+      toast.info("Subiendo imagen...", { id: "upload-image" }); 
 
       if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) {
         console.error("Cloudinary Cloud Name o Upload Preset no están definidos en las variables de entorno.");
@@ -47,6 +46,7 @@ export default function CreateGoal() {
         return;
       }
 
+      // Prepara los datos para enviar a Cloudinary usando FormData
       const formData = new FormData();
       formData.append("file", file);
       formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
@@ -65,28 +65,28 @@ export default function CreateGoal() {
         }
 
         const data = await response.json();
-        setImageUrl(data.secure_url); // Guardar la URL segura de Cloudinary
+        setImageUrl(data.secure_url); // Guarda la URL segura de la imagen subida
         console.log("Imagen subida a Cloudinary:", data.secure_url);
-        toast.success("Imagen subida con éxito!", { id: "upload-image" }); // Notificación de éxito
+        toast.success("Imagen subida con éxito!", { id: "upload-image" }); 
       } catch (error) {
         console.error("Error en la subida de imagen:", error);
         toast.error(`Error al subir la imagen: ${error instanceof Error ? error.message : "Error desconocido"}`, { id: "upload-image" }); // Notificación de error
-        setLocalImagePreview(null); // Limpiar previsualización si falla
-        setImageUrl(null); // Limpiar URL si falla
+        setLocalImagePreview(null); 
+        setImageUrl(null); 
       } finally {
-        setIsUploadingImage(false); // Finalizar la carga de imagen
+        setIsUploadingImage(false); // Finaliza la carga de imagen
       }
     }
   };
 
-  // Lógica para remover la imagen
+  // Función para limpiar la imagen seleccionada y su previsualización
   const removeImage = () => {
     setImageUrl(null);
     setLocalImagePreview(null);
-    toast.info("Imagen eliminada."); // Notificación al remover imagen
+    toast.info("Imagen eliminada."); 
   };
 
-  // Lógica para enviar el formulario de creación de meta
+  // Función para enviar el formulario y crear la meta en el backend
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -94,14 +94,14 @@ export default function CreateGoal() {
       toast.warning("Por favor, completa todos los campos requeridos y asegúrate de que el monto objetivo sea positivo.");
       return;
     }
-
+    // Valida que se haya subido una imagen o que no esté en proceso de subida
     if (!imageUrl && !isUploadingImage) {
       toast.warning("Por favor, sube una imagen para tu meta o espera a que termine la carga.");
       return;
     }
 
     setIsSubmitting(true);
-    toast.loading("Creando tu meta...", { id: "create-goal" }); // Notificación de carga
+    toast.loading("Creando tu meta...", { id: "create-goal" }); 
 
     try {
       const response = await fetch(`${API_BASE_URL}/goals`, {
@@ -112,7 +112,7 @@ export default function CreateGoal() {
         body: JSON.stringify({
           title,
           targetAmount: targetAmount,
-          imageUrl: imageUrl || undefined, // Enviar la URL de Cloudinary (o undefined si no hay imagen)
+          imageUrl: imageUrl || undefined, // Envia la URL de Cloudinary (o undefined si no hay imagen)
         }),
       });
 
@@ -121,18 +121,19 @@ export default function CreateGoal() {
         throw new Error(errorData.error || "Error desconocido al crear la meta.");
       }
 
+       // Si la meta se creó con éxito, obtiene los datos de la nueva meta.
       const newGoal = await response.json();
-      toast.success(`¡Meta "${newGoal.title}" creada con éxito!`, { id: "create-goal" }); // Notificación de éxito
+      toast.success(`¡Meta "${newGoal.title}" creada con éxito!`, { id: "create-goal" }); 
       navigate(`/goal/${newGoal._id}`); // Redirige a la página de detalle de la nueva meta
     } catch (error) {
       console.error("Error al crear la meta:", error);
-      toast.error(`Error al crear la meta: ${error instanceof Error ? error.message : "Error desconocido"}`, { id: "create-goal" }); // Notificación de error
+      toast.error(`Error al crear la meta: ${error instanceof Error ? error.message : "Error desconocido"}`, { id: "create-goal" }); 
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Función para manejar la cancelación
+  // Función para manejar la cancelación del formulario
   const handleCancel = () => {
     navigate('/dashboard'); // Regresa al dashboard
   };
@@ -153,6 +154,7 @@ export default function CreateGoal() {
         </div>
       </header>
 
+      {/* Contenido principal de la página (formulario de creación de meta) */}
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="max-w-xl mx-auto">
           <Card className="bg-white shadow-xl rounded-lg">
@@ -241,6 +243,7 @@ export default function CreateGoal() {
                           className="w-full h-full object-cover"
                         />
                       </div>
+                       {/* Botón para remover la imagen seleccionada */}
                       <Button
                         variant="destructive"
                         size="icon"

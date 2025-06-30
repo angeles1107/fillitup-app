@@ -15,6 +15,10 @@ app.use(express.json());
 app.use('/api/goals', goalRoutes);
 app.use('/api/contributions', contributionRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Backend de FillItUp corriendo correctamente');
+});
+
 const PORT = process.env.PORT || 3000;
 
 // Conexión a MongoDB
